@@ -4,6 +4,7 @@ nextflow.enable.dsl=2
 process ALDY_GENOTYPE {
     tag "${sample_id}:${gene}"
     publishDir { "${params.outdir}/${sample_id}" }, mode: 'copy'
+    containerOptions '--entrypoint ""'
 
     input:
     tuple val(sample_id), path(bam), path(bai), val(gene)
