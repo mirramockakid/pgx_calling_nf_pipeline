@@ -18,4 +18,3 @@ RUN useradd --create-home --shell /bin/bash aldyuser
 USER aldyuser
 WORKDIR /home/aldyuser
 
-ENTRYPOINT ["aldy"]
