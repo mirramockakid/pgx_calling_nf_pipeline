@@ -27,7 +27,7 @@ process ALDY_GENOTYPE {
 workflow {
     bam_ch = Channel
         .fromPath(params.bams)
-        .map { bam -> tuple(bam.simpleName, bam, file("${bam}.bai")) }
+        .map { bam -> tuple(bam.simpleName, bam, file("${bam}.bai", checkIfExists: true)) }
 
     gene_ch = Channel.fromList(params.genes.tokenize())
 
