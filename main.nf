@@ -4,13 +4,12 @@ nextflow.enable.dsl=2
 process ALDY_GENOTYPE {
     tag "${sample_id}:${gene}"
     publishDir { "${params.outdir}/${sample_id}" }, mode: 'copy'
-    disk 200.GB
 
     input:
     tuple val(sample_id), path(bam), path(bai), val(gene)
 
     output:
-    tuple val(sample_id), val(gene), path("${sample_id}_${gene}.aldy")
+    tuple val(sample_id), val(gene), path("${sample_id}_${gene}.vcf")
     path "${sample_id}_${gene}.log"
 
     script:
@@ -19,7 +18,7 @@ process ALDY_GENOTYPE {
         -p ${params.sequencer} \\
         --genome ${params.genome} \\
         -g ${gene} \\
-        -o ${sample_id}_${gene}.aldy \\
+        -o ${sample_id}_${gene}.vcf \\
         --log ${sample_id}_${gene}.log \\
         ${bam}
     """
